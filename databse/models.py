@@ -21,8 +21,9 @@ class Product(models.Model):
     # Author as a string rather than object because it hasn't been declared yet in the file.
     origin = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    photo = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200, blank=True)
     category = models.ManyToManyField(Category, help_text='Select a category for this book')
+    #slug = models.SlugField(unique=True)
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
 
