@@ -38,7 +38,7 @@ class Product(models.Model):
         """
         Returns the url to access a detail record for this book.
         """
-        return reverse('productDetail', args=[str(self.id)])
+        return reverse('product-detail', args=[str(self.id)])
 
 class Customer(models.Model):
     Fname = models.CharField(max_length=200)
@@ -63,6 +63,11 @@ class Customer(models.Model):
 
 class ProductInstance(models.Model):
     Product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
+    STATUS_CHOICES = (
+        ('S', 'Sold'),
+        ('I', 'In-Stock')
+    )
+    status = models.CharField(max_length = 2, choices = STATUS_CHOICES, null=True)
 
     def __str__(self):
         """

@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    url(r'^about/', TemplateView.as_view(template_name='products.html'), name='products')
+    path('products/', views.ProductListView.as_view(), name='products'),
+    path('product/<int:pk>', views.ProductDetailView.as_view(), name='product-detail')
 ]
 
 
