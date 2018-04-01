@@ -21,8 +21,9 @@ class Product(models.Model):
     # Author as a string rather than object because it hasn't been declared yet in the file.
     origin = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    photo = models.CharField(max_length=200, blank=True)
-    category = models.ManyToManyField(Category, help_text='Select a category for this book')
+    photo = models.ImageField(upload_to='templates/products/%Y/%m/%d', blank = True)
+    category = models.ManyToManyField(Category, help_text='Select a category for this product')
+    stock = models.IntegerField()
     #slug = models.SlugField(unique=True)
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
@@ -40,27 +41,6 @@ class Product(models.Model):
         """
         return reverse('product-detail', args=[str(self.id)])
 
-class Customer(models.Model):
-    Fname = models.CharField(max_length=200)
-    Lname = models.CharField(max_length=200)
-    Address = models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
-    Phone = models.CharField(max_length=200)
-
-    def __str__(self):
-        """
-        String for representing the Model object.
-        """
-        return self.Fname + self.Lname
-
-    def get_absolute_url(self):
-        """
-        Returns the url to access a detail record for this book.
-        """
-        return reverse('Customer', args=[str(self.id)])
-
-
-
 class ProductInstance(models.Model):
     Product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     STATUS_CHOICES = (
@@ -76,12 +56,17 @@ class ProductInstance(models.Model):
         return '{0} ({1})'.format(self.id,self.product.name)
 
 class Order(models.Model):
+    Fname = models.CharField(max_length=200)
+    Lname = models.CharField(max_length=200)
+    Address = models.CharField(max_length=200)
+    postal_code = models.CharField(max_length=20)
+    city = models.CharField(max_length=100)
     OrderDate = models.DateField(auto_now=True, auto_now_add=False)
     Product = models.ManyToManyField(ProductInstance)
-    Customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True)
 
     STATUS_CHOICES = (
         ('O', 'Ordered'),
+        ('P', 'Paid'),
         ('S', 'Shipping'),
         ('R', 'Recieved')
     )
@@ -92,9 +77,3 @@ class Order(models.Model):
         String for representing the Model object
         """
         return '{0} ({1})'.format(self.id,self.product.name)
-
-    def get_absolute_url(self):
-        """
-        Returns the url to access a detail record for this book.
-        """
-        return reverse('Order', args=[str(self.id)])
