@@ -1,0 +1,31 @@
+{
+  "name": "towelsite",
+  "version": "1.0.0",
+  "description": "An ecommerce textile site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGerber746/TowelSite.git"
+  },
+  "author": "Matt Gerber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MGerber746/TowelSite/issues"
+  },
+  "homepage": "https://github.com/MGerber746/TowelSite#readme",
+  "dependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.1"
+  }
+}
