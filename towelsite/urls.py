@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^about/', TemplateView.as_view(template_name='about.html'), name='about'),
     #path('cart/', TemplateView.as_view(template_name='cart.html'), name='cart'),
+    url(r'^orders/', include(('databse.urls', 'orders'), namespace="orders")),
     path('products/', views.ProductListView.as_view(), name='products'),
     path('product/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
     url(r'^cart/', include(('cart1.urls', 'cart'), namespace="cart")),

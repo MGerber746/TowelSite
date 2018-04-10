@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.views import generic
-from databse.models import Product
+from databse.models import Product, Order, OrderItem
+from .forms import CreateOrderForm
 from cart1.forms import CartAddProductForm
+from cart1.cart import Cart
+from .tasks import order_created
 
 # Create your views here.
 class ProductListView(generic.ListView):
@@ -20,3 +23,18 @@ class ProductDetailView(generic.DetailView):
         # Create any data and add it to the context
         context['cart_product_form'] = CartAddProductForm()
         return context
+
+def order_create(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        form = CreateOrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            for item in cart:
+                OrderItem.objects.create(order=order, product=item['product'], price=item['price'], quantity=item['quantity'])
+            cart.clear()
+            order_created.delay(order.id)
+            return render(request, 'created.html', {'order': order})
+    else:
+        form = CreateOrderForm()
+    return render(request, 'create.html', {'cart': cart, 'form': form})
