@@ -10,9 +10,8 @@
 
 </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Towelsite</a></li>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,17 +19,19 @@
         </button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-          <li class="nav-link active"><a href="{% url 'home' %}">Home</a></li>
-          <li class="nav-link active"><a href="{% url 'products' %}">Products</a></li>
-          <li class="nav-link active"><a href="{% url 'about' %}">About</a></li>
+          <li class="nav-link active"><a href="{% url 'home' %}" class=text-dark>Home</a></li>
+          <li class="nav-link active"><a href="{% url 'products' %}" class=text-dark>Products</a></li>
+          <li class="nav-link active"><a href="{% url 'about' %}" class=text-dark>About</a></li>
           <li class="nav-link active">{% with total_items=cart|length %}
             {% if cart|length > 0 %}
-              Your cart:
-              <a href="{% url "cart:cart_detail" %}">
-                  {{ total_items }} item{{ total_items|pluralize }}
+              <a href="{% url "cart:cart_detail" %}" class=text-dark>
+                  Cart: {{ total_items }} item{{ total_items|pluralize }}
               </a>
               {% else %}
-                Your cart is empty.
+
+              <a href="{% url "cart:cart_detail" %}" class=text-dark>
+                  Cart: 0
+              </a>
               {% endif %}
             {% endwith %}
             </li>
@@ -40,7 +41,7 @@
     </div>
     </nav>
 
-  </header>
+<body>
   {% block content %}{% endblock content%}
   {% block footer %}{% endblock footer %}
   <script src="{% static 'jquery/jquery.min.js' %}"></script>

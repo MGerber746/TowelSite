@@ -16,6 +16,7 @@ class Product(models.Model):
     Model representing a product
     """
     name = models.CharField(max_length=200)
+    quickDescript = models.TextField(max_length=200, help_text='Enter a brief description of the product')
     description = models.TextField(max_length=1000, help_text='Enter a brief description of the product')
     # Foreign Key used because book can only have one author, but authors can have multiple books
     # Author as a string rather than object because it hasn't been declared yet in the file.
@@ -62,6 +63,7 @@ class Order(models.Model):
     email = models.CharField(max_length=200, null=False)
     postal_code = models.CharField(max_length=20, null=False)
     city = models.CharField(max_length=100, null=False)
+    state = models.CharField(max_length=100, null=False)
     OrderDate = models.DateField(auto_now=True, auto_now_add=False)
 
     STATUS_CHOICES = (
