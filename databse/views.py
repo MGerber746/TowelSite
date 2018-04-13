@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from databse.models import Product, Order, OrderItem
+from databse.models import Product, Order, OrderItem, Category
 from .forms import CreateOrderForm
 from cart1.forms import CartAddProductForm
 from cart1.cart import Cart

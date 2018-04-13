@@ -11,9 +11,9 @@
 </head>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light text-dark static-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info text-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">Towelsite</a></li>
+        <a class="navbar-brand" href="{% url 'home' %}">Las Toallas de Chiapas</a></li>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,7 +21,7 @@
       <ul class="navbar-nav ml-auto">
           <li class="nav-link active"><a href="{% url 'home' %}" class=text-dark>Home</a></li>
           <li class="nav-link active"><a href="{% url 'products' %}" class=text-dark>Products</a></li>
-          <li class="nav-link active"><a href="{% url 'about' %}" class=text-dark>About</a></li>
+          <li class="nav-link active"><a href="{% url 'contactus' %}" class=text-dark>Contact Us</a></li>
           <li class="nav-link active">{% with total_items=cart|length %}
             {% if cart|length > 0 %}
               <a href="{% url "cart:cart_detail" %}" class=text-dark>

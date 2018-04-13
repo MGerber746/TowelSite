@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    url(r'^contactus/', TemplateView.as_view(template_name='about.html'), name='contactus'),
     #path('cart/', TemplateView.as_view(template_name='cart.html'), name='cart'),
     url(r'^orders/', include(('databse.urls', 'orders'), namespace="orders")),
     path('products/', views.ProductListView.as_view(), name='products'),

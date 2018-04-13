@@ -1,18 +1,92 @@
 {% extends 'base.html' %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 {% block content %}
-  <h1>Checkout</h>
-  <div class="order-info">
-      <h3>Your order</h>
-      <ul>
+
+  <div class="container">
+    <h1>Checkout</h1>
+      <h3>Your order:</h3>
+      <table id="cart" class="table table-bordered table-striped table-sm">
+        <thread>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Subtotal</th>
+            </tr>
+        </thread>
+        <tbody>
           {% for item in cart %}
-            <li>{{ item.quanity }}x {{ item.product.name }} <span>{{ item.total_price }}</span></li>
+          <tr>
+            <td data-th="Product">{{ item.product.name }}</td>
+            <td data-th="Quantity">{{ item.quantity }}</td>
+            <td data-th="total">{{ item.total_price }}</td>
+          </tr>
           {% endfor %}
-      </ul>
-      <p>Total: ${{ cart.get_total_price }}</p>
-  </div>
+        </tbody>
+      </table>
+      <div class="text-right">
+        <p class="d-inline font-weight-normal">Total: <p class="font-italic d-inline text-danger">${{ cart.get_total_price }}</p></p>
+      </div>
+
+  <h4>Shipping Information</h4>
   <form action="." method="post" class="order-form">
-      {{ form.as_p }}
-      <p><input type="submit" value="Place order"></p>
+      {{ form.non_field_errors }}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <div class="fieldWrapper">
+            {{ form.Fname.errors }}
+            <label for="{{ form.Fname.id_for_label }}">First Name</label>
+            {{ form.Fname }}
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <div class="fieldWrapper">
+            {{ form.Lname.errors }}
+            <label for="{{ form.Fname.id_for_label }}">Last Name</label>
+            {{ form.Lname }}
+          </div>
+        </div>
+      </div>
+        <div class="form-group">
+          <div class="fieldWrapper">
+            {{ form.email.errors }}
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+          </div>
+        </div>
+          <div class="form-group">
+            <div class="fieldWrapper">
+              {{ form.Address.errors }}
+              <label for="{{ form.Address.id_for_label }}">Address</label>
+              {{ form.Address }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <div class="fieldWrapper">
+                {{ form.city.errors }}
+                <label for="{{ form.city.id_for_label }}">City</label>
+                {{ form.city }}
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <div class="fieldWrapper">
+                {{ form.state.errors }}
+                <label for="{{ form.state.id_for_label }}">State</label>
+                {{ form.state }}
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <div class="fieldWrapper">
+                {{ form.postal_code.errors }}
+                <label for="{{ form.postal_code.id_for_label }}">Postal Code</label>
+                {{ form.postal_code }}
+              </div>
+            </div>
+          </div>
+
+
+      <p><input type="submit" class="btn btn-success"value="Place order"></p>
       {% csrf_token %}
   </form>
+  </div>
 {% endblock content %}
