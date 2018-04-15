@@ -9,6 +9,9 @@ from django.template.loader import get_template
 from django.core.mail import EmailMessage
 from django.template import Context
 
+# Views
+
+# View used for contact form
 def contact(request):
     form_class = ContactForm
 
@@ -26,12 +29,13 @@ def contact(request):
             return redirect('')
     return render(request, 'about.html', {'form':form_class})
 
-# Create your views here.
+# View used for product list
 class ProductListView(generic.ListView):
     model = Product
     context_object_name = 'product_list'
     template_name = 'products.html'
 
+# View used to display a product detail
 class ProductDetailView(generic.DetailView):
     model = Product
     cart_product_form = CartAddProductForm()
@@ -44,6 +48,7 @@ class ProductDetailView(generic.DetailView):
         context['cart_product_form'] = CartAddProductForm()
         return context
 
+# View used to create an order
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':

@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+# A Model that reflects a product category
 class Category(models.Model):
     name = models.CharField(max_length=200)
 
@@ -11,6 +12,7 @@ class Category(models.Model):
         """
         return self.name
 
+# A model that reflects a product
 class Product(models.Model):
     """
     Model representing a product
@@ -42,6 +44,7 @@ class Product(models.Model):
         """
         return reverse('product-detail', args=[str(self.id)])
 
+# A Product instance (Not used this build)
 class ProductInstance(models.Model):
     Product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     STATUS_CHOICES = (
@@ -56,6 +59,7 @@ class ProductInstance(models.Model):
         """
         return '{0} ({1})'.format(self.id,self.product.name)
 
+# A Model that reflects an order
 class Order(models.Model):
     Fname = models.CharField(max_length=200, null=False)
     Lname = models.CharField(max_length=200, null=False)
@@ -86,6 +90,7 @@ class Order(models.Model):
     def get_total_price(self):
         return sum(item.get_cost() for item in self.items.all())
 
+# A model that reflects an item in an order
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.SET_NULL, null=True)

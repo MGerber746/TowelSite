@@ -5,7 +5,9 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 # Create your views here.
+#Uses the cart class to update the webpage and session
 
+#Adds and item to the cart
 @require_POST
 def cart_add(request,product_id):
     cart = Cart(request)
@@ -16,12 +18,14 @@ def cart_add(request,product_id):
         cart.add(product=product, quantity=cd['quantity'], update_quantity=cd['update'])
     return redirect('cart:cart_detail')
 
+#Removes an item from the cart
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
 
+#Returns cart information
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:
