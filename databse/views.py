@@ -1,10 +1,30 @@
 from django.shortcuts import render
 from django.views import generic
 from databse.models import Product, Order, OrderItem, Category
-from .forms import CreateOrderForm
+from .forms import CreateOrderForm, ContactForm
 from cart1.forms import CartAddProductForm
 from cart1.cart import Cart
 from .tasks import order_created
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+from django.template import Context
+
+def contact(request):
+    form_class = ContactForm
+
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+        if form.is_valid():
+            contact_name = form.cleaned_data['contact_name']
+            contact_email = form.cleaned_data['contact_email']
+            form_content = form.cleaned_data['content']
+            template = get_template('contact_template.txt')
+            context = Context({'contact_name':contact_name, 'contaxt_email':contact_email, 'form_content':form_content})
+            content = template.render(context)
+            email = EmailMessage('New contact form submission', content, 'LTDC <test@ltdc.com>', [''], headers = {'Reply-To':contact_email})
+            email.send()
+            return redirect('')
+    return render(request, 'about.html', {'form':form_class})
 
 # Create your views here.
 class ProductListView(generic.ListView):

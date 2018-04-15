@@ -14,3 +14,8 @@ class CreateOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['Fname', 'Lname', 'email', 'Address', 'postal_code', 'city', 'state']
+
+class ContactForm(forms.Form):
+    contact_name = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Input your name'}))
+    contact_email = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Input your email'}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder':'Your message','rows':'5'}))

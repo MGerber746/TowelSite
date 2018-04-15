@@ -2,40 +2,40 @@
 {% load static %}
 <link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
 {% block content %}
-    <div class="container">
+<div class="container">
 
-      <div class="row">
+  <div class="row">
     {% if product_list %}
 
 
 
-          <div class="row my-4">
-        {% for product in product_list %}
-        <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100 border-0 rounded-0">
-                <a href="{{ product.get_absolute_url }}"><img class="card-img-top rounded-0" src="{{ product.photo.url }}" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                  </h4>
-                  <h5>{{product.price}}</h5>
-                  <!--
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                -->
-                </div>
-              </div>
-            </div>
-
-        {% endfor %}
+    <div class="row my-4">
+      {% for product in product_list %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100 border-0 rounded-0">
+          <a href="{{ product.get_absolute_url }}"><img class="card-img-top rounded-0" src="{{ product.photo.url }}" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </h4>
+            <h5>{{product.price}}</h5>
+            <!--
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+          -->
+        </div>
       </div>
+    </div>
 
-    </div>
-      {% else %}
-        <p>There are no products.</p>
-      {% endif %}
-    </div>
+    {% endfor %}
   </div>
-      <!-- Bootstrap core JavaScript -->
-    <script src="static/jquery/jquery.min.js"></script>
-    <script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</div>
+{% else %}
+<p>There are no products.</p>
+{% endif %}
+</div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="static/jquery/jquery.min.js"></script>
+<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
 {% endblock content %}
