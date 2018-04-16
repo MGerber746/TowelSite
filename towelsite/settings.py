@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'databse.apps.DatabseConfig',
     'cart1',
+    'paypal.standard.ipn',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,8 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_PORT = 1205
+
+
+#Paypal settings
+PAYPAL_RECIEVER_EMAIL = 'LasTextilesDeChiapas@gmail.com'
+PAYPAY_TEST = True
