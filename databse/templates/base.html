@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Towel Site</title>{% endblock %}
+  {% block title %}<title>Chiapan Towels</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
@@ -13,7 +13,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-info text-dark static-top">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'home' %}">Los Textiles de Chiapas</a></li>
+    <a class="navbar-brand" href="{% url 'home' %}">Textiles of Chiapas</a></li>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,8 +42,22 @@
 </nav>
 
 <body>
+
   {% block content %}{% endblock content%}
-  {% block footer %}{% endblock footer %}
+  <!--Footer-->
+<footer class="page-footer font-small blue pt-4 mt-4">
+
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3 text-center">
+        © 2018 Copyright: Los Textiles de Chiapas
+    </div>
+    <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->
+  {% block footer %}
+  {% endblock footer %}
   <script src="{% static 'jquery/jquery.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
